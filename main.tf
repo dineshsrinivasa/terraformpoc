@@ -185,3 +185,16 @@ resource "google_compute_firewall" "dinesh-poc-vpc-network" {
   }
   target_tags = ["allow-health-check"]
 }
+
+resource "google_project_iam_custom_role" "dinesh-custom-restart-role" {
+  role_id     = "dineshRole"
+  title       = "dineshcs"
+  description = "A description"
+  permissions = ["compute.instances.reset"]
+}
+
+resource "google_project_iam_member" "project" {
+  project = "internal-interview-candidates"
+  role    = "projects/internal-interview-candidates/roles/dineshRole"
+  member  = "user:medineshsrinivasa@gmail.com"
+}
